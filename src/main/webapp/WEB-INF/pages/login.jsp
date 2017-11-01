@@ -22,7 +22,7 @@
 </style>
 </head>
 <body class=".container-fluid">
-	<div class="container" ng-app="loginApp" ng-controller="loginCtrl">
+	<div class="container" ng-app="loginApp" ng-controller="loginCtrl" >
 		<div class="panel panel-success myrow-container">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -54,7 +54,7 @@
                             <div ng-message="minlength">must have minimum 6 characters</div>
                             <div ng-message="pattern">At least one number and uppercase</div>
                         </div>
-					<button type="submit" class="btn btn-primary">Log In</button>
+					<button type="submit" class="btn btn-primary ">Log In</button>
 				</form>
 			</div>
 		</div>
