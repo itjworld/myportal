@@ -1,6 +1,5 @@
 package com.gspann.config;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,22 +13,23 @@ import com.gspann.security.SecurityUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
+public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	
 	@Autowired
-	private  DataSource dataSource;
-	
-	@Autowired
-    private SecurityUserDetailsService securityUserDetailsService;
-	
+	private SecurityUserDetailsService securityUserDetailsService;
+
 	@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(securityUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
-	
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(securityUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+	}
+
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        
-    }
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/resources/**").permitAll().antMatchers("/", "/login").anonymous().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").loginProcessingUrl("/authentication").defaultSuccessUrl("/home", true)
+				.failureUrl("/login?error=true").and().logout().logoutSuccessUrl("/login").permitAll().and().exceptionHandling()
+				.accessDeniedPage("/403").and().csrf();
+	}
 
 }
