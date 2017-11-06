@@ -1,7 +1,7 @@
 'use strict';
 var app = angular.module('empApp', ['datatables','datatables.bootstrap']);
 app.controller('empCtrl', function($scope,$http,DTOptionsBuilder, DTColumnBuilder,$compile) {
-	var REST_SERVICE_URI = 'http://localhost:8080/Spring-Rest-hibernate/employee/';
+	var REST_SERVICE_URI = 'http://localhost:8080/myportal/employee/';
 	 $scope.employee={id:null,name:'',age:'',salary:'',email:''};
 	 $scope.employees=[];
 	 $scope.edit=edit;
@@ -131,5 +131,20 @@ app.controller('empCtrl', function($scope,$http,DTOptionsBuilder, DTColumnBuilde
    function render(){
 	   $scope.dtInstance.rerender();
    }
+   
+   $scope.logout = function() {
+	   $http.post('http://localhost:8080/myportal/logout', {}).then(
+		       function (response) {
+		    	   if (response.status ==200 && response.statusText=='OK') {
+		                window.location.replace('/myportal/');
+		            }else {
+		                console.log('Access denied');
+		            }
+		       },
+		       function(errResponse){
+		           console.error('Error while deleting Employee');
+		       }
+		 );
+	 }
    
 });

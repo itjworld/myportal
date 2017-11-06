@@ -32,5 +32,78 @@ public class Users implements Serializable{
 	@Column(name="enabled",nullable=false)
 	private boolean enabled=true;
 	
+	@Column(name="accountNonExpired",nullable=false)
+	private boolean accountNonExpired=false;
+	
+	@Column(name="credentialsNonExpired",nullable=false)
+	private boolean credentialsNonExpired=false;
+	
+	@Column(name="accountNonLocked",nullable=false)
+	private boolean accountNonLocked=false;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

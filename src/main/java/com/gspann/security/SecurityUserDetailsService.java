@@ -1,25 +1,40 @@
 package com.gspann.security;
 
+import java.util.ArrayList;
+import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.gspann.entities.Users;
+import com.gspann.repositories.dao.UserDao;
 
 /**
  *
- * UserDetails service that reads the user credentials from the database, using a JPA repository.
+ * UserDetails service that reads the user credentials from the database, using
+ * a JPA repository.
  *
  */
-@Service(value="securityUserDetailsService")
+@Service(value = "securityUserDetailsService")
 public class SecurityUserDetailsService implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       
+	@Autowired
+	private UserDao userDao;
 
-        return null;
-    }
+	@Override
+	
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		final Users users = userDao.findUserByUsername(username);
+		if(null==users) {
+			throw new UsernameNotFoundException("Username not found" + username);
+		}
+		final List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		return new User(users.getUserName(), users.getPassword(), users.isEnabled(), users.isAccountNonExpired(),
+				users.isCredentialsNonExpired(), users.isAccountNonLocked(), authorities);
+	}
 }
