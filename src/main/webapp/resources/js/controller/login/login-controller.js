@@ -1,83 +1,58 @@
 'use strict';
-var app = angular.module('loginApp', []);
-app.controller('loginCtrl',['$scope', '$http', function($scope, $http) {
-	var LOGIN_URI = '/myportal/authenticate';
-	var method='POST';
-	var headers= {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8;","X-Login-Ajax-call": 'true'};
-	$scope.alter='';
-	$scope.in=false;
-	$scope.submitted=false;
-	$scope.auth = {
-		username : '',
-		password : ''
-	};
-	/*var fieldWithFocus;
-	$scope.focus = function(fieldName) {
-		fieldWithFocus = fieldName;
-	};
 
-	$scope.blur = function(fieldName) {
-		fieldWithFocus = undefined;
-	};
+angular
+		.module('appPortal')
+		.controller(
+				'loginCtrl',
+				[
+						'$scope',
+						'loginService',
+						function($scope, loginService) {
+							$scope.alter = '';
+							$scope.show = false;
+							$scope.auth = {
+								username : '',
+								password : ''
+							};
+							$scope.onLogin = function() {
+								var credentials = 'username='
+										+ $scope.auth.username + '&password='
+										+ $scope.auth.password;
+								loginService
+										.login(credentials)
+										.then(
+												function(data) {
+													var msg = 'Something is wrong!'
+													if (data != '') {
+														if (data == 'OK') {
+															window.location
+																	.replace('/myportal/views/home.html');
+														} else if (data == 'BAD') {
+															msg = 'Wrong credentials, try again!';
+														} else if (data == 'DISABLED') {
+															msg = 'User has been disabled!';
+														} else if (data == 'LOCKED') {
+															msg = 'User account has been locked!';
+														} else if (data == 'EXPIRED') {
+															msg = 'User account has been expired!';
+														} else if (data == 'CREDENTIAL_EXPIRED') {
+															msg = 'Credential has been expired!';
+														}
+													}
+													showAlter(msg, true);
+												},
+												function(errResponse) {
+													showAlter(
+															'Something is wrong!',
+															true);
+												});
 
-	$scope.isMessagesVisible = function(fieldName) {
-		return fieldWithFocus === fieldName || $scope.submitted;
-	};*/
-	$scope.onLogin = function() {
-		$scope.submitted = true;
-		var credentials='username=' + $scope.auth.username + '&password=' + $scope.auth.password; 
-		$http({
-            method: method,
-            url: LOGIN_URI,
-            data: credentials,
-            headers:headers
-        })
-        .then(function(response) {
-        	if (response.status ==200 && response.statusText=='OK') {
-                window.location.replace('/myportal/views/home.html');
-            }else if (response.status ==203)  {
-            	if(response.data=='BAD'){
-            		showAlter('Wrong credentials, try again!',true);
-            	}else if(response.data=='DISABLED'){
-            		showAlter('User has been disabled!',true);
-            	}else if(response.data=='LOCKED'){
-            		showAlter('User account has been locked!',true);
-            	}else if(response.data=='EXPIRED'){
-            		showAlter('User account has been expired!',true);
-            	}else if(response.data=='CREDENTIAL_EXPIRED'){
-            		showAlter('Credential has been expired!',true);
-            	}
-            	$scope.in=true;
-            }else{
-            	showAlter('Something is wrong!',true);
-            }
-        },
-        function(errResponse){
-        	showAlter(errResponse,true);
-        });
-		function showAlter(msg,show){
-			$scope.alter=msg;
-        	$scope.in=show;
-		}
-		$scope.close=function(){
-			showAlter('',false);
-		}
-	}
-	}]).directive(
-			'checkPasswordsMatch',
-			function() {
-				return {
-					require : 'ngModel',
-					link : function(scope, elm, attrs, ngModel) {
-						ngModel.$validators.checkPasswordsMatch = function(
-								modelValue, viewValue) {
-							if (scope.auth && scope.auth.password && viewValue) {
-								console.log(modelValue);
-								console.log(viewValue);
-								return scope.auth.password === viewValue;
 							}
-							return true;
-						};
-					}
-				};
-			});
+							function showAlter(msg, show) {
+								$scope.alter = msg;
+								$scope.show = show;
+							}
+							$scope.close = function() {
+								showAlter('', false);
+							}
+						} ]);

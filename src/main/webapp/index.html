@@ -11,14 +11,15 @@
 <script src="resources/js/api/jquery.min.js"></script>
 <script src="resources/js/api/bootstrap.min.js"></script>
 <script src="resources/js/api/angular.min.js"></script>
+<!-- <script src="resources/js/api/angular-route.min.js"></script> -->
 <style type="text/css">
 .myrow-container {
 	margin: 20%;
 }
 </style>
 </head>
-<body class=".container-fluid">
-	<div class="container" ng-app="loginApp" ng-controller="loginCtrl">
+<body class=".container-fluid" ng-app="appPortal">
+	<div class="container"  ng-controller="loginCtrl">
 		<div class="panel panel-success myrow-container">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -27,7 +28,7 @@
 					</div>
 				</h3>
 			</div>
-			<div class="alert alert-danger alert-dismissable" ng-show="in">
+			<div class="alert alert-danger alert-dismissable" ng-show="show">
 				<a href="javascript:void(0)" class="close"  aria-label="close" ng-click="close()">&times;</a>
 				{{alter}}
 			</div>
@@ -53,5 +54,6 @@
 </body>
 
 </html>
-
-<script src="resources/js/controller/login-controller.js"></script>
+<script src="resources/js/api/app.js"></script>
+<script src="resources/js/service/login/login-service.js"></script>
+<script src="resources/js/controller/login/login-controller.js"></script>

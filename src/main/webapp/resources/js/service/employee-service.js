@@ -1,41 +1,40 @@
 'use strict';
-angular.module('empApp').factory('employeeService', ['$http', '$q', function($http, $q){
+angular.module('appPortal').factory('employeeService', ['$http', '$q', function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:8080/Spring-Rest-hibernate/employee/';
+	var REST_SERVICE_URI = '/myportal/employee/';
 
     var factory = {
         fetchAllEmployee: fetchAllEmployee,
         createEmployee: createEmployee,
         updateEmployee:updateEmployee,
-        deleteEmployee:deleteEmployee
+        deleteEmployee:deleteEmployee,
+        logout:logout
     };
 
     return factory;
 
-    function fetchAllEmployee() {
+    function fetchAllEmployee(params) {
         var deferred = $q.defer();
-        $http.get(REST_SERVICE_URI)
+        $http.get(REST_SERVICE_URI,params)
             .then(
             function (response) {
-                deferred.resolve(response.data);
+                deferred.resolve(response);
             },
             function(errResponse){
-                console.error('Error while fetching Employee');
                 deferred.reject(errResponse);
             }
         );
         return deferred.promise;
     }
 
-    function createEmployee(user) {
+    function createEmployee(employee) {
         var deferred = $q.defer();
-        $http.post(REST_SERVICE_URI, user)
+        $http.post(REST_SERVICE_URI, employee)
             .then(
             function (response) {
-                deferred.resolve(response.data);
+                deferred.resolve(response);
             },
             function(errResponse){
-                console.error('Error while creating Employee');
                 deferred.reject(errResponse);
             }
         );
@@ -43,15 +42,14 @@ angular.module('empApp').factory('employeeService', ['$http', '$q', function($ht
     }
 
 
-    function updateEmployee(user, id) {
+    function updateEmployee(id,employee) {
         var deferred = $q.defer();
-        $http.put(REST_SERVICE_URI+id, user)
+        $http.put(REST_SERVICE_URI+id, employee)
             .then(
             function (response) {
-                deferred.resolve(response.data);
+                deferred.resolve(response);
             },
             function(errResponse){
-                console.error('Error while updating Employee');
                 deferred.reject(errResponse);
             }
         );
@@ -63,14 +61,27 @@ angular.module('empApp').factory('employeeService', ['$http', '$q', function($ht
         $http.delete(REST_SERVICE_URI+id)
             .then(
             function (response) {
-                deferred.resolve(response.data);
+                deferred.resolve(response);
             },
             function(errResponse){
-                console.error('Error while deleting Employee');
                 deferred.reject(errResponse);
             }
         );
         return deferred.promise;
     }
+    function logout(){
+		   $http.post('/myportal/logout', {}).then(
+			       function (response) {
+			    	   if (response.status ==200 && response.statusText=='OK') {
+			                window.location.replace('/myportal/');
+			            }else {
+			                console.log('Access denied');
+			            }
+			       },
+			       function(errResponse){
+			           console.error('Something wrong!');
+			       }
+			 );
+		 }
 
 }]);

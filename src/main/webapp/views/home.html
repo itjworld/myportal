@@ -28,14 +28,14 @@
 }
 </style>
 </head>
-<body class=".container-fluid">
-	<div class="container myrow-container" ng-app="empApp"
+<body class=".container-fluid" ng-app="appPortal">
+	<div class="container myrow-container" 
 		ng-controller="empCtrl">
 		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<div align="center">
-						<b>Employee Detail</b><a href="javasecript:void(0);" ng-click="logout()">Logout</a>
+						<b>Employee Detail</b><a href="javasecript:void(0);" ng-click="logout()" style="float: right;">Logout</a>
 					</div>
 				</h3>
 			</div>
@@ -99,5 +99,7 @@
 
 </body>
 </html>
+<script src="../resources/js/api/app-datatables.js"></script>
+<script src="../resources/js/service/employee-service.js"></script>
 <script src="../resources/js/controller/employee-controller.js" ></script>
 
