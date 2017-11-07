@@ -25,7 +25,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		
 		
 		if (X_AJAX_CALL.equals(request.getHeader(X_AJAX_CALL))) {
-			response.getWriter().print("ok");
+			response.getWriter().print("OK");
 			response.getWriter().flush();
 		} else {
 			defaultHandler.onAuthenticationSuccess(request, response, authentication);

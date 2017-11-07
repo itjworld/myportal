@@ -69,6 +69,7 @@ app.controller('empCtrl', function($scope,$http,DTOptionsBuilder, DTColumnBuilde
     }
     
     $scope.submit=function() {
+    	console.log($scope.employee)
     	if($scope.employee.id>0){
     		updateEmployee($scope.employee);
     	}else{

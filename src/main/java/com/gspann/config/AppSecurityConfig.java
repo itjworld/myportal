@@ -32,25 +32,29 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SecurityUserDetailsService securityUserDetailsService;
-	
+
 	@Autowired
 	private AuthFailureHandler authFailureHandler;
+	
+	
+
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(securityUserDetailsService);//.passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(securityUserDetailsService);// .passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/**", "/").permitAll().anyRequest()
-				.authenticated().and().formLogin()
-				.defaultSuccessUrl("/views/home.html").loginProcessingUrl("/authenticate").usernameParameter("username")
-				.successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-				.failureHandler(authFailureHandler)
-				.passwordParameter("password").loginPage("/index.html").and().httpBasic().and().logout()
-				.logoutUrl("/logout").logoutSuccessUrl("/index.html").permitAll().and().csrf()
-				.csrfTokenRepository(csrfTokenRepository()).and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+		http.authorizeRequests().antMatchers("/resources/**", "/").permitAll().anyRequest().authenticated().and()
+				.formLogin().defaultSuccessUrl("/views/home.html")
+				.loginProcessingUrl("/authenticate").usernameParameter("username")
+				.successHandler(
+						new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
+				.failureHandler(authFailureHandler).passwordParameter("password").loginPage("/index.html").and()
+				.httpBasic().and().logout().logoutUrl("/logout").logoutSuccessUrl("/index.html").permitAll().and()
+				.csrf().csrfTokenRepository(csrfTokenRepository()).and()
+				.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 		;
 	}
 
