@@ -16,10 +16,9 @@ app.controller('empCtrl', function($scope,$http,DTOptionsBuilder, DTColumnBuilde
      .withOption('serverSide', true)
      .withOption('processing', true)
      .withOption('bFilter', false)
-     .withOption('bSort', false)
-     .withOption('paging', false)
+     .withOption('bLengthChange', false)
      .withOption('rowCallback', rowCallback)
-     .withOption("aaSorting", [0])
+     .withOption("aaSorting", [0, 'asc'])
      .withPaginationType('full_numbers');
    $scope.dtColumns = [
      DTColumnBuilder.newColumn('name').withTitle('Name'),
@@ -39,14 +38,23 @@ app.controller('empCtrl', function($scope,$http,DTOptionsBuilder, DTColumnBuilde
        $compile(nRow)($scope);
 }
    function serverData(sSource, aoData, fnCallback, oSettings) {
-	   $http.get(REST_SERVICE_URI)
+	   var page=aoData[3].value;
+	   if(page!=0){
+		   page=parseInt(page)-1;
+	   }
+	   var params= {params:{page:page,pageSize:aoData[4].value,sort:aoData[2].value[0].column,sortBy:aoData[2].value[0].dir}};
+	   $http.get(REST_SERVICE_URI,params)
        .then(
        function (response) {
-    	   $scope.employees=response.data;
+    	   $scope.employees=response.data.results;
+    	   var total=response.data.id
+    	   if($scope.employees==null || $scope.employees.length==0){
+    		   $scope.employees=[];
+    	   }
     	   var records = {
-                   'draw': 1,
-                   'recordsTotal': 5,
-                   'recordsFiltered':5,
+                   'draw': aoData[0].value,
+                   'recordsTotal': total,
+                   'recordsFiltered':total,
                    'data': $scope.employees
                };
     	   fnCallback(records);
