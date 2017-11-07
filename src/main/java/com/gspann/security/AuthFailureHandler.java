@@ -17,7 +17,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import com.gspann.constant.BadCredential;
+import com.gspann.constant.Credential;
 
 
 @Component
@@ -29,15 +29,15 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler{
 			throws IOException, ServletException {
 		response.setStatus(HttpServletResponse.SC_NON_AUTHORITATIVE_INFORMATION);
 		if(exception instanceof BadCredentialsException) {
-			response.getWriter().print(BadCredential.BAD.name());
+			response.getWriter().print(Credential.BAD.name());
 		}else if(exception instanceof LockedException) {
-			response.getWriter().print(BadCredential.LOCKED.name());
+			response.getWriter().print(Credential.LOCKED.name());
 		}else if(exception instanceof DisabledException) {
-			response.getWriter().print(BadCredential.DISABLED.name());
+			response.getWriter().print(Credential.DISABLED.name());
 		}else if(exception instanceof AccountExpiredException) {
-			response.getWriter().print(BadCredential.EXPIRED.name());
+			response.getWriter().print(Credential.EXPIRED.name());
 		}else if(exception instanceof CredentialsExpiredException) {
-			response.getWriter().print(BadCredential.CREDENTIAL_EXPIRED.name());
+			response.getWriter().print(Credential.CREDENTIAL_EXPIRED.name());
 		}else {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);	
 		}

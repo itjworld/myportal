@@ -1,6 +1,7 @@
 package com.gspann.constant;
 
-public enum BadCredential {
+public enum Credential {
+	OK,
 	BAD,
 	LOCKED,
 	DISABLED,

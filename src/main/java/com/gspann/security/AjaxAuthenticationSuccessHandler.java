@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.gspann.constant.Credential;
+
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	  
 	private static final String X_AJAX_CALL = "X-Login-Ajax-call";
@@ -25,7 +27,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		
 		
 		if (X_AJAX_CALL.equals(request.getHeader(X_AJAX_CALL))) {
-			response.getWriter().print("OK");
+			response.getWriter().print(Credential.OK.name());
 			response.getWriter().flush();
 		} else {
 			defaultHandler.onAuthenticationSuccess(request, response, authentication);
