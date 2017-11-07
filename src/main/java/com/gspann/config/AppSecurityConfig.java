@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -30,6 +31,8 @@ import com.gspann.security.SecurityUserDetailsService;
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private static int workload = 12;
+	
 	@Autowired
 	private SecurityUserDetailsService securityUserDetailsService;
 
@@ -41,7 +44,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(securityUserDetailsService);// .passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(securityUserDetailsService).passwordEncoder(new BCryptPasswordEncoder(workload));
 	}
 
 	@Override
