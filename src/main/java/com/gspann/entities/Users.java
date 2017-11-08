@@ -33,13 +33,13 @@ public class Users implements Serializable{
 	private boolean enabled=true;
 	
 	@Column(name="accountNonExpired",nullable=false)
-	private boolean accountNonExpired=false;
+	private boolean accountNonExpired=true;
 	
 	@Column(name="credentialsNonExpired",nullable=false)
-	private boolean credentialsNonExpired=false;
+	private boolean credentialsNonExpired=true;
 	
 	@Column(name="accountNonLocked",nullable=false)
-	private boolean accountNonLocked=false;
+	private boolean accountNonLocked=true;
 
 	public long getId() {
 		return id;
