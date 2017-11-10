@@ -2,6 +2,10 @@ package com.gspann.utils;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 public class Password {
 	private static int workload = 12;
 	
@@ -11,10 +15,11 @@ public class Password {
 		return(hashed_password);
 	}
 	public static boolean checkPassword(String password_plaintext, String stored_hash) {
+		System.out.println(stored_hash);
 		return BCrypt.checkpw(password_plaintext, stored_hash);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(checkPassword("Ashish2","$2a$12$oDLAZpkhRXmDSOEqKGhNgO04d8ccgcFog4S9cgdRTfXbC13CVo8uy"));
-	}
+	/*public static void main(String[] args) {
+		System.out.println(checkPassword("admin",hashPassword("admin")));
+	}*/
 }

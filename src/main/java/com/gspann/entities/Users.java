@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Entity
 @Table(name="TBL_USERS")
 public class Users implements Serializable{
@@ -24,7 +28,7 @@ public class Users implements Serializable{
 	private long id;
 	
 	@Column(name="user_name",nullable=false,unique=true,length=100)
-	private String userName;
+	private String username;
 	
 	@Column(name="password",nullable=false,length=255)
 	private String password;
@@ -49,12 +53,12 @@ public class Users implements Serializable{
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

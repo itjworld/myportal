@@ -17,6 +17,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import static org.hibernate.cfg.Environment.*;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
@@ -48,6 +52,14 @@ public class AppConfig {
 		props.put(C3P0_ACQUIRE_INCREMENT, env.getProperty("hibernate.c3p0.acquire_increment"));
 		props.put(C3P0_TIMEOUT, env.getProperty("hibernate.c3p0.timeout"));
 		props.put(C3P0_MAX_STATEMENTS, env.getProperty("hibernate.c3p0.max_statements"));
+		
+		// Setting cache properties
+		
+		//props.put(USE_SECOND_LEVEL_CACHE, env.getProperty("hibernate.cache.use_second_level_cache"));
+		//props.put(USE_QUERY_CACHE, env.getProperty("hibernate.cache.use_query_cache"));
+		//props.put(CACHE_REGION_FACTORY, env.getProperty("hibernate.cache.region.factory_class"));
+		//props.put("hibernate.javax.cache.provider",env.getProperty("hibernate.cache.provider"));
+		//props.put(CACHE_PROVIDER_CONFIG, env.getProperty("ehcache.configurationResourceName"));
 
 		factoryBean.setHibernateProperties(props);
 		factoryBean.setPackagesToScan("com.gspann.entities");
@@ -71,6 +83,7 @@ public class AppConfig {
 	      driverManagerDataSource.setPassword(env.getProperty("db.password"));
 	      return driverManagerDataSource;
 	  }
-	
+	  
+	  
 		
 }

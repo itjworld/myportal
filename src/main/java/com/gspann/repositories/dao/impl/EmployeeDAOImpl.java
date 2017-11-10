@@ -14,6 +14,10 @@ import com.gspann.entities.Employee;
 import com.gspann.repositories.dao.EmployeeDAO;
 import com.gspann.repositories.utils.GenericAbstractDao;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Repository(value="employeeDAO")
 public class EmployeeDAOImpl extends GenericAbstractDao<Employee> implements EmployeeDAO{
 

@@ -22,11 +22,11 @@ angular
 										.login(credentials)
 										.then(
 												function(data) {
-													var msg = 'Something is wrong!'
+													var msg = ''
 													if (data != '') {
 														if (data == 'OK') {
 															window.location
-																	.replace('/myportal/views/home.html');
+																	.replace('/views/home.html');
 														} else if (data == 'BAD') {
 															msg = 'Wrong credentials, try again!';
 														} else if (data == 'DISABLED') {
@@ -37,7 +37,11 @@ angular
 															msg = 'User account has been expired!';
 														} else if (data == 'CREDENTIAL_EXPIRED') {
 															msg = 'Credential has been expired!';
+														}else{
+															msg = 'Something is wrong!'	
 														}
+													}else{
+														 msg = 'Something is wrong!'
 													}
 													showAlter(msg, true);
 												},

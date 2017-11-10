@@ -4,6 +4,10 @@ package com.gspann.service;
 import com.gspann.beans.Message;
 import com.gspann.entities.Employee;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 public interface EmployeeService {
 	
 	public long createEmployee(Employee employee);

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('appPortal').factory('loginService', ['$http', '$q', function($http, $q){
-	var LOGIN_URI = '/myportal/authenticate';
+	var LOGIN_URI = '/authenticate';
 	var method='POST'; 
 	var headers= {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8;","X-Login-Ajax-call": 'true'};
 	

@@ -8,6 +8,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+/**
+ * @author Ashish Jaiswal
+ *
+ * @param <T>
+ */
 public abstract class GenericAbstractDao<T> {
 
 	@Autowired

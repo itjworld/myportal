@@ -2,6 +2,7 @@ package com.gspann.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Entity
+//@Cacheable
+//@Cache(usage=CacheConcurrencyStrategy.READ_ONLY,region="employee")
 @Table(name="TBL_EMPLOYEE",uniqueConstraints= {@UniqueConstraint(columnNames= {"EMAIL"})})
 public class Employee implements Serializable{
 

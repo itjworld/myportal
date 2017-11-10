@@ -7,6 +7,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.gspann" })

@@ -2,6 +2,10 @@ package com.gspann.beans;
 
 import java.util.List;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 public class Message {
 	
 	private long id;

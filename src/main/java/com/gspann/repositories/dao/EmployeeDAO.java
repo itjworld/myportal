@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.gspann.entities.Employee;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 public interface EmployeeDAO {
 	public long addEmployee(Employee employee);
     public Employee updateEmployee(Employee employee);

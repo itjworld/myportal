@@ -5,6 +5,10 @@ import javax.servlet.Filter;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Order(value=0)
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 

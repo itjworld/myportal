@@ -7,17 +7,19 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.gspann.entities.Users;
 import com.gspann.repositories.dao.UserDao;
 import com.gspann.repositories.utils.GenericAbstractDao;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Repository(value="userDao")
 public class UserDaoImpl extends GenericAbstractDao<Users> implements UserDao {
 
 	@Override
-	@Transactional(readOnly = true)
 	public Users findUserByUsername(final String username) {
 		CriteriaQuery<Users> criteria = null;
 		CriteriaBuilder criteriaBuilder = null;
@@ -30,7 +32,7 @@ public class UserDaoImpl extends GenericAbstractDao<Users> implements UserDao {
 			criteriaBuilder = session.getCriteriaBuilder();
 			criteria = criteriaBuilder.createQuery(Users.class);
 			root = criteria.from(Users.class);
-			predicate = criteriaBuilder.equal(root.get("userName"), username);
+			predicate = criteriaBuilder.equal(root.get("username"), username);
 			criteria.where(predicate);
 			result= session.createQuery(criteria).getSingleResult();
 		} catch (Exception e) {
@@ -44,6 +46,17 @@ public class UserDaoImpl extends GenericAbstractDao<Users> implements UserDao {
 			
 		}
 		return result;
+	}
+
+	@Override
+	public boolean isExistUser(String username) {
+		final Users result=findUserByUsername(username);
+		return result!=null?true:false;
+	}
+
+	@Override
+	public void createUser(Users users) {
+		create(users);
 	}
 
 }

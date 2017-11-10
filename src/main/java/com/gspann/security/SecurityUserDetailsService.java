@@ -12,29 +12,26 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.gspann.entities.Users;
-import com.gspann.repositories.dao.UserDao;
-
+ import com.gspann.service.UserService;
 /**
- *
- * UserDetails service that reads the user credentials from the database, using
- * a JPA repository.
+ * @author Ashish Jaiswal
  *
  */
 @Service(value = "securityUserDetailsService")
 public class SecurityUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserService userService;
 
 	@Override
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		final Users users = userDao.findUserByUsername(username);
+		final Users users = userService.findUserByUsername(username);
 		if(null==users) {
 			throw new UsernameNotFoundException("Username not found" + username);
 		}
 		final List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		return new User(users.getUserName(), users.getPassword(), users.isEnabled(), users.isAccountNonExpired(),
+		return new User(users.getUsername(), users.getPassword(), users.isEnabled(), users.isAccountNonExpired(),
 				users.isCredentialsNonExpired(), users.isAccountNonLocked(), authorities);
 	}
 }

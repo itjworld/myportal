@@ -17,6 +17,8 @@
 		<c3p0.version>0.9.5.2</c3p0.version>
 		<maven.compiler.version>3.1</maven.compiler.version>
 		<jstl.version>1.2</jstl.version>
+		<ehcache.core.version>2.6.11</ehcache.core.version>
+		<net.ehcache.version>2.10.4</net.ehcache.version>
 	</properties>
 
 	<dependencies>
@@ -32,18 +34,46 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- Support for Ehcache and others -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<!-- Hibernate ORM -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- Hibernate-C3P0 Integration -->
+
+		<!-- Hibernate-EhCache Integration -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
+			<artifactId>hibernate-ehcache</artifactId>
 			<version>${hibernate.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.sf.ehcache</groupId>
+					<artifactId>ehcache</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${net.ehcache.version}</version>
+		</dependency>
+
 
 		<!-- c3p0 -->
 		<dependency>
@@ -96,7 +126,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-	
+
 	</dependencies>
 	<build>
 		<finalName>myportal</finalName>
@@ -105,6 +135,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven.compiler.version}</version>
 				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<fork>true</fork>

@@ -27,6 +27,10 @@ import com.gspann.security.AjaxAuthenticationSuccessHandler;
 import com.gspann.security.AuthFailureHandler;
 import com.gspann.security.SecurityUserDetailsService;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -49,7 +53,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/css/**", "/","/resources/js/api/**","/resources/js/controller/login/login-controller.js","/resources/js/service/login/login-service.js").permitAll().anyRequest().authenticated().and()
+		http.authorizeRequests().antMatchers("/resources/css/**", "/","/addUser/","/resources/js/api/**","/resources/js/controller/login/login-controller.js","/resources/js/controller/createuser-controller.js","/resources/js/service/login/login-service.js","/views/createUser.html").permitAll().anyRequest().authenticated().and()
 				.formLogin().defaultSuccessUrl("/views/home.html")
 				.loginProcessingUrl("/authenticate").usernameParameter("username")
 				.successHandler(

@@ -20,6 +20,10 @@ import org.springframework.stereotype.Component;
 import com.gspann.constant.Credential;
 
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Component
 public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler{
 	

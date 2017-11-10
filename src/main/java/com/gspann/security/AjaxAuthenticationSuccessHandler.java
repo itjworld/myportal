@@ -11,6 +11,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.gspann.constant.Credential;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	  
 	private static final String X_AJAX_CALL = "X-Login-Ajax-call";

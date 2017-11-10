@@ -73,6 +73,7 @@ angular
 							}
 							function serverData(sSource, aoData, fnCallback,
 									oSettings) {
+								console.log(aoData);
 								var page = aoData[3].value;
 								if (page != 0) {
 									page = parseInt(page) - 1;
@@ -94,6 +95,7 @@ angular
 													if ($scope.employees == null
 															|| $scope.employees.length == 0) {
 														$scope.employees = [];
+														total=0;
 													}
 													var records = {
 														'draw' : aoData[0].value,

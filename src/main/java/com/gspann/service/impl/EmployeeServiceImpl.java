@@ -11,6 +11,10 @@ import com.gspann.entities.Employee;
 import com.gspann.repositories.dao.EmployeeDAO;
 import com.gspann.service.EmployeeService;
 
+/**
+ * @author Ashish Jaiswal
+ *
+ */
 @Service(value="employeeService")
 public class EmployeeServiceImpl implements EmployeeService{
 
