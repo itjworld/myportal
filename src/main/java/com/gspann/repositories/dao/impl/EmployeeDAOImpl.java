@@ -72,7 +72,7 @@ public class EmployeeDAOImpl extends GenericAbstractDao<Employee> implements Emp
 				order=criteriaBuilder.asc(from.get(column));
 			}
 			criteria.select(from).orderBy(order);
-			results= session.createQuery(criteria).setFirstResult(page*pageSize).setMaxResults(pageSize).getResultList();
+			results= session.createQuery(criteria).setFirstResult(page).setMaxResults(pageSize).getResultList();
 		} catch (Exception e) {
 			System.err.println(e);
 		} finally {

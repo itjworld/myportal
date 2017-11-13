@@ -1,7 +1,7 @@
 'use strict';
-angular.module('appPortal').factory('employeeService', ['$http', '$q', function($http, $q){
+angular.module('appPortal').factory('employeeService', ['$http', '$q','contextPath', function($http, $q,contextPath){
 
-	var REST_SERVICE_URI = '/employee/';
+	var REST_SERVICE_URI = contextPath+'/employee/';
 
     var factory = {
         fetchAllEmployee: fetchAllEmployee,
@@ -70,10 +70,10 @@ angular.module('appPortal').factory('employeeService', ['$http', '$q', function(
         return deferred.promise;
     }
     function logout(){
-		   $http.post('/logout', {}).then(
+		   $http.post(contextPath+'/logout', {}).then(
 			       function (response) {
 			    	   if (response.status ==200 && response.statusText=='OK') {
-			                window.location.replace('/');
+			                window.location.replace(contextPath);
 			            }else {
 			                console.log('Access denied');
 			            }

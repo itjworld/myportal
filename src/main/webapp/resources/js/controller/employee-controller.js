@@ -73,11 +73,7 @@ angular
 							}
 							function serverData(sSource, aoData, fnCallback,
 									oSettings) {
-								console.log(aoData);
 								var page = aoData[3].value;
-								if (page != 0) {
-									page = parseInt(page) - 1;
-								}
 								var params = {
 									params : {
 										page : page,

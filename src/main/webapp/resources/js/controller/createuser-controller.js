@@ -4,7 +4,8 @@ angular.module('appPortal').controller(
 		[
 				'$scope',
 				'$http',
-				function($scope, $http) {
+				'contextPath',
+				function($scope, $http,contextPath) {
 					$scope.auth = {
 						username : '',
 						password : '',
@@ -19,7 +20,7 @@ angular.module('appPortal').controller(
 							$scope.auth.comfirm = $scope.auth.password = '';
 						} else {
 							var credentials={username: $scope.auth.username,password:$scope.auth.password};
-							$http.post('/addUser/', credentials).then(
+							$http.post(contextPath+'/addUser/', credentials).then(
 									function(response) {
 										var msg='';
 										if("FOUND"==response){

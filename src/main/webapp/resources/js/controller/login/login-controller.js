@@ -7,7 +7,8 @@ angular
 				[
 						'$scope',
 						'loginService',
-						function($scope, loginService) {
+						'contextPath',
+						function($scope, loginService,contextPath) {
 							$scope.alter = '';
 							$scope.show = false;
 							$scope.auth = {
@@ -26,7 +27,7 @@ angular
 													if (data != '') {
 														if (data == 'OK') {
 															window.location
-																	.replace('/views/home.html');
+																	.replace(contextPath+'/views/home.html');
 														} else if (data == 'BAD') {
 															msg = 'Wrong credentials, try again!';
 														} else if (data == 'DISABLED') {
@@ -43,7 +44,10 @@ angular
 													}else{
 														 msg = 'Something is wrong!'
 													}
-													showAlter(msg, true);
+													if(msg!=''){
+														showAlter(msg, true);	
+													}
+													
 												},
 												function(errResponse) {
 													showAlter(
