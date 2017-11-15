@@ -1,5 +1,5 @@
 'use strict';
-angular.module('appPortal').factory('loginService', ['$http', '$q','contextPath', function($http, $q,contextPath){
+app.factory('loginService', ['$http', '$q','contextPath', function($http, $q,contextPath){
 	var LOGIN_URI=contextPath+'/authenticate';
 	var method='POST'; 
 	var headers= {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8;","X-Login-Ajax-call": 'true'};

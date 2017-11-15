@@ -9,8 +9,9 @@ angular.module('appPortal').controller(
 					$scope.auth = {
 						username : '',
 						password : '',
-						comfirm : ''
+						comfirm : ''						
 					};
+					$scope.contextPath = contextPath;
 					$scope.alter = '';
 					$scope.show = false;
 					$scope.createUser = function() {
@@ -22,15 +23,16 @@ angular.module('appPortal').controller(
 							var credentials={username: $scope.auth.username,password:$scope.auth.password};
 							$http.post(contextPath+'/addUser/', credentials).then(
 									function(response) {
+										console.log(response);
 										var msg='';
-										if("FOUND"==response){
+										if("FOUND"==response.data){
 											msg="Already user exist,Please enter unique user name!"
-										}else if("CREATED"==response){
+										}else if("CREATED"==response.data){
 											msg="Successfully add user!"
 										}else{
 											msg="Something wrong!"
 										}
-										showAlter(msg, true);
+										if(msg!=''){showAlter(msg, true);}
 										$scope.auth = {
 												username : '',
 												password : '',

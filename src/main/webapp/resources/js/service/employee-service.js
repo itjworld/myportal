@@ -1,7 +1,8 @@
 'use strict';
-angular.module('appPortal').factory('employeeService', ['$http', '$q','contextPath', function($http, $q,contextPath){
+app.factory('employeeService', ['$http', '$q','contextPath', function($http, $q,contextPath){
 
 	var REST_SERVICE_URI = contextPath+'/employee/';
+	var contextPath = contextPath;
 
     var factory = {
         fetchAllEmployee: fetchAllEmployee,

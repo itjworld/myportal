@@ -1,7 +1,5 @@
 'use strict';
-angular
-		.module('appPortal')
-		.controller(
+app.controller(
 				'empCtrl',
 				[
 						'$scope',
@@ -9,8 +7,9 @@ angular
 						'DTColumnBuilder',
 						'$compile',
 						'employeeService',
+						'contextPath',
 						function($scope, DTOptionsBuilder, DTColumnBuilder,
-								$compile, employeeService) {
+								$compile, employeeService, contextPath) {
 
 							$scope.employee = {
 								id : null,
@@ -19,6 +18,7 @@ angular
 								salary : '',
 								email : ''
 							};
+							$scope.contextPath = contextPath;
 							$scope.employees = [];
 							$scope.edit = edit;
 							$scope.remove = remove;
@@ -31,7 +31,7 @@ angular
 											'serverSide', true).withOption(
 											'processing', true).withOption(
 											'bFilter', false).withOption(
-											'bLengthChange', false).withOption(
+											'bLengthChange', true).withOption(
 											'rowCallback', rowCallback)
 									.withOption("aaSorting", [ 0, 'asc' ])
 									.withPaginationType('full_numbers');
@@ -73,6 +73,7 @@ angular
 							}
 							function serverData(sSource, aoData, fnCallback,
 									oSettings) {
+								console.log(aoData);
 								var page = aoData[3].value;
 								var params = {
 									params : {
@@ -87,6 +88,7 @@ angular
 										.then(
 												function(response) {
 													$scope.employees = response.data.results;
+													console.log($scope.employees);
 													var total = response.data.id
 													if ($scope.employees == null
 															|| $scope.employees.length == 0) {

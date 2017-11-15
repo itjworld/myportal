@@ -1,16 +1,16 @@
 'use strict';
 
-angular
-		.module('appPortal')
-		.controller(
+app.controller(
 				'loginCtrl',
 				[
 						'$scope',
 						'loginService',
 						'contextPath',
 						function($scope, loginService,contextPath) {
+							$scope.contextPath=contextPath;
 							$scope.alter = '';
 							$scope.show = false;
+							
 							$scope.auth = {
 								username : '',
 								password : ''
