@@ -27,7 +27,7 @@ app.controller(
 													if (data != '') {
 														if (data == 'OK') {
 															window.location
-																	.replace(contextPath+'/views/home.html');
+																	.replace(contextPath+'/views/welcome.html');
 														} else if (data == 'BAD') {
 															msg = 'Wrong credentials, try again!';
 														} else if (data == 'DISABLED') {

@@ -55,7 +55,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/resources/js/controller/login/login-controller.js",
 						"/resources/js/controller/createuser-controller.js",
 						"/resources/js/service/login/login-service.js", "/views/createUser.html")
-				.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/views/home.html")
+				.permitAll().anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/views/welcome.html")
 				.loginProcessingUrl("/authenticate").usernameParameter("username")
 				.successHandler(
 						new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))

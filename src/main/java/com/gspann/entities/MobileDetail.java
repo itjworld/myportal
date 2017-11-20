@@ -50,6 +50,14 @@ public class MobileDetail implements Serializable {
 		this.name = name;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return name + " : " + mobile;

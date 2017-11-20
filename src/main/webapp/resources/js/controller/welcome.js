@@ -1,6 +1,6 @@
-var app = angular.module('appPortal',['ngRoute','datatables','datatables.bootstrap']);
-app.value('contextPath', window.location.origin+"/myportal");
-app.config(function($routeProvider) {
+'use strict';
+
+var app = angular.module("appPortal", ["ngRoute"]).config(function($routeProvider) {
     $routeProvider
     .when("/home", {
         templateUrl : "/myportal/views/home.html"
@@ -13,8 +13,6 @@ app.config(function($routeProvider) {
     })
     .when("/info", {
         templateUrl : "/myportal/views/info.html"
-    })
-    .otherwise({
-        redirectTo: '/home'
     });
 });
+

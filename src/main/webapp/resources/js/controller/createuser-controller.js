@@ -1,5 +1,5 @@
 'use strict';
-angular.module('appPortal').controller(
+app.controller(
 		'userCtrl',
 		[
 				'$scope',
