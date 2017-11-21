@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Transactional(readOnly=true)
 	public Message getAllEmployees(Integer page,Integer pageSize,Integer sort,String sortBy) {
 		Message result= new Message();
-		result.setId(employeeDAO.countRow());
+		result.setId(employeeDAO.countRow(Employee.class));
 		result.setResults(employeeDAO.getAllEmployees(page,pageSize,sort,sortBy));
 		return result;
 	}

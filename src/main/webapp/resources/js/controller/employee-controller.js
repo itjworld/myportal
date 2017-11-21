@@ -30,7 +30,7 @@ app.controller(
 									.withDisplayLength(5).withOption(
 											'serverSide', true).withOption(
 											'processing', true).withOption(
-											'bFilter', false).withOption(
+											'bFilter', true).withOption(
 											'bLengthChange', true).withOption(
 											'rowCallback', rowCallback)
 									.withOption("aaSorting", [ 0, 'asc' ])

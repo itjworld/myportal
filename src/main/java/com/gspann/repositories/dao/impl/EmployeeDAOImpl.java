@@ -96,32 +96,4 @@ public class EmployeeDAOImpl extends GenericAbstractDao<Employee> implements Emp
 		return null;
 	}
 
-	@Override
-	public long countRow() {
-		CriteriaQuery<Long> criteria = null;
-		CriteriaBuilder criteriaBuilder = null;
-		CriteriaQuery<Long> select =null;
-		long result=0;
-		Session session=null;
-		Root<Employee> from=null;
-		try {
-			session = getCurrentSession();
-			criteriaBuilder = session.getCriteriaBuilder();
-			criteria = criteriaBuilder.createQuery(Long.class);
-			from = criteria.from(Employee.class);
-			select=criteria.select(criteriaBuilder.countDistinct(from));
-			result= session.createQuery(select).getSingleResult();
-		} catch (Exception e) {
-			System.err.println(e);
-		} finally {
-			criteria = null;
-			criteriaBuilder = null;
-			from=null;
-			select=null;
-			session=null;
-			
-		}
-		return result;
-	}
-
 }

@@ -29,7 +29,7 @@ app.controller(
 									.withDisplayLength(5).withOption(
 											'serverSide', true).withOption(
 											'processing', true).withOption(
-											'bFilter', false).withOption(
+											'bFilter', true).withOption(
 											'bLengthChange', true).withOption(
 											'rowCallback', rowCallback)
 									.withOption("aaSorting", [ 0, 'asc' ])
@@ -70,23 +70,24 @@ app.controller(
 							}
 							function serverData(sSource, aoData, fnCallback,
 									oSettings) {
-								console.log("+++++++++ data : " + aoData);
+								console.log(JSON.stringify(aoData[5].value.value));
 								var page = aoData[3].value;
 								var params = {
 									params : {
 										page : page,
 										pageSize : aoData[4].value,
 										sort : aoData[2].value[0].column,
-										sortBy : aoData[2].value[0].dir
+										sortBy : aoData[2].value[0].dir,
+										searchParam:aoData[5].value.value
 									}
 								};
 								infoService
 										.fetchAllDetails(params)
 										.then(
 												function(response) {
-													$scope.details = response.data;
+													$scope.details = response.data.results;
 													console.log($scope.details);
-													var total = response.data.length;
+													var total = response.data.id;
 													if ($scope.details == null
 															|| $scope.details.length == 0) {
 														$scope.details = [];

@@ -2,6 +2,7 @@ package com.gspann.service;
 
 import java.util.List;
 
+import com.gspann.beans.Message;
 import com.gspann.entities.MobileDetail;
 
 public interface MobileDetailService {
@@ -13,5 +14,7 @@ public interface MobileDetailService {
 	void delete(long id);
 
 	void updateDesc(MobileDetail desc);
+
+	Message getDetails(Integer page, Integer pageSize, Integer sort, String sortBy, String searchParam);
 
 }

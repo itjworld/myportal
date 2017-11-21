@@ -13,7 +13,7 @@ public interface EmployeeDAO {
     public Employee updateEmployee(Employee employee);
     public void deleteEmployee(long id);
     public List<Employee> getAllEmployees(Integer page,Integer pageSize,Integer sort,String sortBy);
-    public long countRow();
+    public long countRow(Class<Employee> class1);
     public Employee getEmployeeById(long id);   
     public List<Employee> searchEmployee(String searchPara);
 
